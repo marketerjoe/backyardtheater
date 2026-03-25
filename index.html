@@ -6,31 +6,9 @@
 <title>The Backyard Theater Company</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Roboto+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/common.css">
 <style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C97A;
-    --gold-dark: #8B6914;
-    --teal: #3A6E7F;
-    --teal-dark: #264A57;
-    --red: #B8412A;
-    --cream: #F9F3E8;
-    --dark: #1A1208;
-    --warm-dark: #251A08;
-    --text: #2C1F08;
-    --text-light: #6B5230;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--cream);
-    color: var(--text);
-    font-family: 'Lora', Georgia, serif;
-    overflow-x: hidden;
-  }
+  /* page-specific vars and base styles moved to css/common.css */
 
   /* ===== STRING LIGHTS ANIMATION ===== */
   @keyframes bulbFlicker {
@@ -57,56 +35,10 @@
     100% { background-position: 200% center; }
   }
 
-  /* ===== NAV ===== */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.96);
-    backdrop-filter: blur(10px);
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.3);
-  }
+  /* NAV moved to css/common.css */
 
-  .nav-logo img {
-    height: 32px;
-    filter: brightness(1.1);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    text-decoration: none;
-    transition: color 0.2s;
-    position: relative;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px; left: 0; right: 0;
-    height: 1px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.3s;
-  }
-
-  .nav-links a:hover { color: #fff; }
-  .nav-links a:hover::after { transform: scaleX(1); }
+  /* Page-specific body colors (override common defaults) */
+  body { background: var(--cream); color: var(--text); }
 
   /* ===== HERO ===== */
   .hero {
@@ -213,19 +145,7 @@
     animation: fadeUp 1s ease 0.7s both;
   }
 
-  .btn {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 14px 36px;
-    text-decoration: none;
-    transition: all 0.3s;
-    cursor: pointer;
-    border: none;
-    display: inline-block;
-  }
+  /* base .btn moved to css/common.css; keep page-specific button variants below */
 
   .btn-primary {
     background: var(--gold);
@@ -267,41 +187,7 @@
     padding: 0;
   }
 
-  .section-label {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--gold-dark);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .section-label::before {
-    content: '';
-    display: inline-block;
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-  }
-  .dark .section-label {
-    color: white;
-  }
-  .dark .section-label::before {
-    background: white;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 52px;
-    font-weight: 900;
-    line-height: 1.05;
-    color: var(--dark);
-    margin-bottom: 20px;
-  }
+  /* Section heading styles moved to css/common.css; page-specific overrides below */
 
   .section-subtitle {
     font-family: 'Lora', Georgia, serif;
@@ -321,7 +207,21 @@
     margin: 0 0 16px;
     opacity: 0.6;
   }
-
+  .section-title {
+    color: var(--dark);
+  }
+  .section-label {
+    color: var(--gold);
+  }
+  .section-label::before {
+    background: var(--gold);
+  }
+  .dark .section-label {
+    color: var(--cream);
+  }
+  .dark .section-label::before {
+    background: var(--cream);
+  }
   /* ===== ANNOUNCEMENTS ===== */
   #announcements {
     background: linear-gradient(135deg, var(--teal-dark) 0%, #1C3A45 50%, var(--teal-dark) 100%);
@@ -738,63 +638,7 @@
     font-style: italic;
   }
 
-  /* ===== FOOTER ===== */
-  footer {
-    background: #0A0704;
-    padding: 60px 40px 32px;
-    text-align: center;
-  }
-
-  footer img.footer-icon {
-    width: 64px;
-    margin-bottom: 16px;
-    opacity: 0.8;
-  }
-
-  footer img.footer-wordmark {
-    width: 240px;
-    margin-bottom: 24px;
-    opacity: 0.7;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-    justify-content: center;
-    margin-bottom: 40px;
-  }
-
-  .footer-links a {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(201, 168, 76, 0.6);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-links a:hover { color: var(--gold-light); }
-
-  .footer-divider {
-    width: 60px;
-    height: 1px;
-    background: rgba(201, 168, 76, 0.2);
-    margin: 0 auto 24px;
-  }
-
-  footer p.copyright {
-    font-size: 12px;
-    color: rgba(249, 243, 232, 0.25);
-    letter-spacing: 0.1em;
-    font-family: 'Cormorant Garamond', serif;
-  }
-  @media (max-width: 600px) {
-    .footer-links {
-      flex-direction: column;
-    }
-  }
+  /* FOOTER moved to css/common.css */
 
 
   /* ===== LIGHTBOX ===== */
@@ -1056,27 +900,18 @@
           <div class="card-title" style="background: linear-gradient(90deg, #87CEFA, #E8F4FF, #87CEFA); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200%; animation: shimmer 3s linear infinite;">❄️ Frozen</div>
           <div class="card-body">This summer we're bringing the magic of Arendelle to our backyard stage! Full costumes, choreography, and the songs you love. Auditions opening soon.</div>
           <div class="card-date" style="margin-bottom:14px;">Summer 2026 · Herriman, UT</div>
-          <form action="frozen.html">
-            <button onclick="" class="btn btn-primary">Learn more</button>
-          </form>
+          <a href="frozen.html" target="_blank">
+            <button class="btn btn-primary">Learn more</button>
+          </a>
       </div>
 
       <div class="announcement-card" id="audition-card">
         <div class="card-tag audition"><span class="tag-dot"></span>Auditions Open</div>
         <div class="card-title">Sign Up to Audition</div>
         <div class="card-body">Auditions are open for all ages! No experience necessary. Click below to fill out the sign-up form.</div>
-        <div class="card-date" style="margin-bottom:14px;">Coming Soon · TBD</div>
-        <button onclick="toggleForm()" class="btn btn-primary" style="font-size:12px; padding: 10px 22px; width: 100%;">📋 Open Audition Sign-Up Form</button>
-        <div id="audition-form-container" style="display:none; margin-top:16px; border: 1px solid rgba(201,168,76,0.2);">
-          <!-- REPLACE the src below with your actual Google Form embed URL -->
-          <!-- To get it: Google Forms → Send → Embed → Copy the src URL from the iframe code -->
-          <iframe id="audition-form-iframe"
-            src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true"
-            width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0"
-            style="background:#1a1208; display:block;">
-            Loading form...
-          </iframe>
-        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfRs4PVs2GIn2xTt9dP9KEzPILFBqvaKFIh7IZHBIBq9hjyGA/viewform" target="_blank">
+          <button class="btn btn-primary">Audition Form</button>
+        </a>
       </div>
       <!-- ==============================
            CALLBACKS — Edit the names below

@@ -6,31 +6,9 @@
 <title>Frozen — The Backyard Theater Company · 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Roboto+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/common.css">
 <style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C97A;
-    --gold-dark: #8B6914;
-    --ice-blue: #A8D8EA;
-    --ice-mid: #6BB8D4;
-    --ice-deep: #2A6A8A;
-    --ice-dark: #0D2A3D;
-    --ice-darkest: #06141F;
-    --frost: #E8F6FF;
-    --cream: #F9F3E8;
-    --dark: #1A1208;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--ice-darkest);
-    color: var(--frost);
-    font-family: 'Lora', Georgia, serif;
-    overflow-x: hidden;
-  }
-
+  /* Page-specific styles (hero, snow, characters, synopsis, etc.) */
   /* ===== SNOWFLAKE ANIMATION ===== */
   @keyframes snowfall {
     0%   { transform: translateY(-20px) translateX(0px) rotate(0deg); opacity: 0; }
@@ -59,39 +37,7 @@
     50%       { transform: translateY(-8px); }
   }
 
-  /* ===== NAV ===== */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.92);
-    backdrop-filter: blur(10px);
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(168, 216, 234, 0.15);
-  }
-
-  .nav-logo img { height: 32px; }
-
-  .nav-links {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(168, 216, 234, 0.8);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: #fff; }
+  /* nav moved to common.css */
 
   /* ===== SNOWFLAKES ===== */
   .snowflakes {
@@ -251,9 +197,7 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     padding: 7px 16px;
-    border: 1px solid rgba(168, 216, 234, 0.35);
     color: var(--ice-blue);
-    background: rgba(168, 216, 234, 0.07);
   }
 
   .hero-cta {
@@ -262,45 +206,14 @@
     animation: fadeUp 0.8s ease 0.9s both;
   }
 
-  .btn {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 14px 36px;
-    text-decoration: none;
-    transition: all 0.3s;
-    cursor: pointer;
-    border: none;
-    display: inline-block;
-  }
+  /* buttons moved to common.css */
   @media(max-width: 600px)  {
     .hero-cta {
       flex-direction: column;
     }
   }
 
-  .btn-ice {
-    background: var(--ice-mid);
-    color: var(--ice-darkest);
-  }
-  .btn-ice:hover {
-    background: var(--ice-blue);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(107, 184, 212, 0.4);
-  }
-
-  .btn-outline {
-    border: 1px solid rgba(168, 216, 234, 0.4);
-    color: var(--ice-blue);
-    background: transparent;
-  }
-  .btn-outline:hover {
-    border-color: var(--ice-blue);
-    background: rgba(168, 216, 234, 0.1);
-    transform: translateY(-2px);
-  }
+  /* buttons moved to common.css */
 
   .scroll-hint {
     position: absolute;
@@ -329,42 +242,7 @@
   }
 
   /* ===== SYNOPSIS ===== */
-  #synopsis {
-    padding: 100px 40px;
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-  }
-
-  .section-label {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--ice-mid);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .section-label::before {
-    content: '';
-    display: inline-block;
-    width: 40px;
-    height: 1px;
-    background: var(--ice-mid);
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 900;
-    color: var(--frost);
-    margin-bottom: 20px;
-    line-height: 1.1;
-  }
+  #synopsis { padding: 100px 40px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
 
   .synopsis-layout {
     display: grid;
@@ -434,6 +312,10 @@
     color: var(--frost);
     text-align: right;
   }
+  .detail-value a {
+    color: var(--ice-blue);
+    text-decoration: underline;
+  }
 
   .aside-cta {
     display: block;
@@ -450,10 +332,7 @@
     text-decoration: none;
     transition: all 0.3s;
   }
-  .aside-cta:hover {
-    background: var(--ice-blue);
-    transform: translateY(-2px);
-  }
+  .aside-cta:hover { background: var(--ice-blue); transform: translateY(-2px); }
 
   /* ===== CHARACTERS ===== */
   #characters {
@@ -463,7 +342,8 @@
     z-index: 2;
   }
 
-  #characters .inner {
+  #characters .inner,
+  #auditions .inner {
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -583,49 +463,11 @@
     color: rgba(232, 246, 255, 0.58);
   }
 
+  #auditions p {
+    margin-bottom: 10px;
+  }
   /* ===== FOOTER ===== */
-  footer {
-    background: #000;
-    padding: 60px 40px 32px;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    border-top: 1px solid rgba(168, 216, 234, 0.1);
-  }
-  .footer-logo {
-    max-width: 300px;
-    margin-bottom: 50px;
-  }
-  footer img.footer-icon { width: 220px; margin-bottom: 20px; opacity: 0.75; }
-
-  .footer-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-    justify-content: center;
-    margin-bottom: 32px;
-  }
-
-  .footer-links a {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(168, 216, 234, 0.5);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--ice-blue); }
-
-  footer p.copyright {
-    font-size: 12px;
-    color: rgba(232, 246, 255, 0.2);
-    letter-spacing: 0.1em;
-    font-family: 'Cormorant Garamond', serif;
-  }
-  @media(max-width: 600px) {
-    .footer-links {flex-direction: column;}
-  }
+  /* footer moved to common.css */
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
@@ -639,6 +481,8 @@
     .nav-links { display: none; }
     .frozen-title { font-size: 72px; }
   }
+
+  /* link color handled in css/common.css */
 </style>
 </head>
 <body>
@@ -654,10 +498,10 @@
     </a>
   </div>
   <ul class="nav-links">
-    <li><a href="backyard-theater-website.html#announcements">Announcements</a></li>
-    <li><a href="backyard-theater-website.html#gallery">2025 Season</a></li>
-    <li><a href="backyard-theater-website.html#about">About</a></li>
-    <li><a href="backyard-theater-website.html#payment">Register</a></li>
+    <li><a href="index.html#announcements">Announcements</a></li>
+    <li><a href="index.html#gallery">2025 Season</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#payment">Register</a></li>
   </ul>
 </nav>
 
@@ -718,7 +562,8 @@
     </div>
     <div class="hero-cta">
       <a href="#characters" class="btn btn-ice">Meet the Cast</a>
-      <a href="backyard-theater-website.html#payment" class="btn btn-outline">Register / Donate</a>
+      <a href="#auditions" class="btn btn-ice">Audition Info</a>
+      <a href="index.html#payment" class="btn btn-outline">Register / Donate</a>
     </div>
   </div>
 
@@ -757,17 +602,25 @@
       </div>
       <div class="detail-row">
         <span class="detail-label">Location</span>
-        <span class="detail-value">Salt Lake City, UT</span>
+        <span class="detail-value">Herriman, UT</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Auditions</span>
-        <span class="detail-value">Coming Soon</span>
+        <span class="detail-value">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfRs4PVs2GIn2xTt9dP9KEzPILFBqvaKFIh7IZHBIBq9hjyGA/viewform" target="_blank">
+            Sign Up
+          </a>
+        </span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Performances</span>
         <span class="detail-value">TBD</span>
       </div>
-      <a href="backyard-theater-website.html#payment" class="aside-cta">Register Now</a>
+      <div class="detail-row">
+        <span class="detail-label">Registration</span>
+        <span class="detail-value">$20</span>
+      </div>
+      <a href="index.html#payment" class="aside-cta">Register Now</a>
     </div>
   </div>
 </section>
@@ -871,15 +724,41 @@
   </div>
 </div>
 
+
+<!-- AUDITIONS -->
+<section id="auditions" style="padding:100px 40px; background: rgba(10, 30, 45, 0.7); position: relative; z-index:2;">
+  <div class="inner">
+    <div class="section-label">Auditions</div>
+    <h2 class="section-title">Audition Information</h2>
+
+    <div style="color: rgba(232,246,255,0.86); font-size:16px; line-height:1.8;">
+    <p>We are so excited to announce our 2026 summer production, Frozen. Auditions for this show are going to take place <strong>April 23rd and 24th from 5 to 7pm</strong>. You will need to fill out what day you need to audition in the form linked in the Production Details.</p>
+
+    <p>A doc will be posted here on <strong>April 10th</strong> showing your audition times and days according to the preferences stated in your form. If the time or date doesn’t match what you put in the form or you need to change your time or date please contact <a href="tel:8016332108">801-633-2108</a>.</p>
+
+    <p>For your audition you will need to prepare about <strong>1 minute of a song</strong> in the same style as the show. You may be asked to read a few lines or sing certain things, but you do not need to prepare anything besides your one-minute audition piece.</p>
+
+    <p>A callback list will be posted by <strong>9pm on April 24th</strong>. Callback will be on <strong>Saturday, April 25th from 4–7pm</strong>, where you will read a few lines (provided at callback — no need to bring lines) and sing a song of the character (specific song and sheet music will be provided on the website with the callback list). A small dance routine will also be taught at the callback.</p>
+
+    <p>A final cast list will be posted by <strong>April 29th</strong>.</p>
+
+    <p>Rehearsals will run from <strong>July 13th through July 30th</strong>. Performances will be <strong>July 31st and August 1st</strong>. Mandatory rehearsals will be <strong>July 27th through July 30th</strong>. Typical rehearsal times will be <strong>11:00am–1:00pm</strong>, and some mandatory rehearsals may be 3 hours long and/or held later in the evening. Rehearsal locations may vary, so please check the rehearsal schedule when it is released.</p>
+
+    <p>Performances and mandatory rehearsals will be at: <strong>14887 Upper Bend Drive, Herriman, Utah</strong>. If you have any questions about this process, please contact <a href="tel:8016332108">801-633-2108</a>.</p>
+    </div>
+  </div>
+
+</section>
+
 <!-- FOOTER -->
 <footer>
   <img class="footer-logo" src="images/backyard-theater-company-text.png" alt="Backyard Theater Logo"/>
   <ul class="footer-links">
-    <li><a href="backyard-theater-website.html">Home</a></li>
-    <li><a href="backyard-theater-website.html#announcements">Announcements</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#announcements">Announcements</a></li>
     <li><a href="#synopsis">Synopsis</a></li>
     <li><a href="#characters">Characters</a></li>
-    <li><a href="backyard-theater-website.html#payment">Register</a></li>
+    <li><a href="index.html#payment">Register</a></li>
   </ul>
   <p class="copyright">© 2026 The Backyard Theater Company · Founded by Luke LeBaron · Salt Lake City, UT</p>
 </footer>
