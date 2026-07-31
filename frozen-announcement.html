@@ -62,8 +62,6 @@
   .hero {
     min-height: 100vh;
     position: relative;
-    z-index: 1;
-    isolation: isolate;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -220,11 +218,9 @@
   .scroll-hint {
     position: absolute;
     bottom: 32px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: fit-content;
-    z-index: 20;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -240,7 +236,9 @@
     color: var(--ice-blue);
   }
   .scroll-arrow {
-    color: var(--ice-blue);
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(180deg, var(--ice-blue), transparent);
   }
 
   /* ===== SYNOPSIS ===== */
@@ -357,7 +355,7 @@
 
   .characters-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
   }
 
@@ -390,53 +388,24 @@
 
   .character-card:hover::before { opacity: 1; }
 
-  .character-photo {
-    width: 120px;
-    height: 120px;
+  .character-emoji {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: 3px solid var(--ice-mid);
-    margin-bottom: 18px;
-    background-color: rgba(107, 184, 212, 0.08);
-    background-size: cover;
-    background-position: center top;
-    transition: all 0.35s;
-    cursor: pointer;
-  }
-
-  /* ===== LIGHTBOX ===== */
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    z-index: 1000;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 28px;
+    margin-bottom: 18px;
+    background: rgba(107, 184, 212, 0.08);
+    transition: all 0.35s;
   }
-  .lightbox.active { display: flex; }
-  .lightbox img {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: 8px;
-  }
-  .lightbox-close {
-    position: absolute;
-    top: 24px; right: 32px;
-    font-size: 32px;
-    color: var(--ice-blue);
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-family: serif;
-    line-height: 1;
-    opacity: 0.8;
-  }
-  .lightbox-close:hover { opacity: 1; }
 
-  .character-card:hover .character-photo {
+  .character-card:hover .character-emoji {
     border-color: var(--ice-blue);
     box-shadow: 0 0 20px rgba(168, 216, 234, 0.3);
+    animation: pulseGlow 2s ease-in-out infinite;
   }
 
   .character-name {
@@ -454,15 +423,7 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--ice-mid);
-    margin-bottom: 10px;
-  }
-
-  .character-actor {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--frost);
-    margin-left: 8px;
+    margin-bottom: 14px;
   }
 
   .character-desc {
@@ -471,114 +432,40 @@
     color: rgba(232, 246, 255, 0.62);
   }
 
+  .character-card.featured {
+    grid-column: span 2;
+    background: rgba(168, 216, 234, 0.07);
+    border-color: rgba(168, 216, 234, 0.2);
+  }
+
+  .character-card.featured .character-name { font-size: 26px; }
+  .character-card.featured .character-desc { font-size: 14px; }
+
+  .additional-role-row {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(168, 216, 234, 0.08);
+  }
+  .additional-role-row:last-child { border-bottom: none; }
+
+  .add-role-name {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--frost);
+    margin-bottom: 3px;
+  }
+
+  .add-role-desc {
+    display: block;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(232, 246, 255, 0.58);
+  }
+
   #auditions p {
     margin-bottom: 10px;
   }
-
-  .section-subtitle {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 18px;
-    max-width: 560px;
-    line-height: 1.7;
-    margin-bottom: 56px;
-  }
-
-  /* ===== PAYMENT (copied from index.html) ===== */
-  #payment {
-    background: linear-gradient(135deg, var(--teal-dark) 0%, #1C3A45 50%, var(--teal-dark) 100%);
-    max-width: 100%;
-    padding: 100px 40px;
-    position: relative;
-    z-index: 2;
-  }
-
-  #payment .inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  #payment .section-title {
-    color: var(--cream);
-  }
-
-  #payment .section-subtitle {
-    color: rgba(249, 243, 232, 0.65);
-  }
-
-  .payment-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-
-  .payment-card {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(201, 168, 76, 0.25);
-    padding: 40px 32px;
-    text-align: center;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .payment-card:hover {
-    background: rgba(255, 255, 255, 0.11);
-    transform: translateY(-4px);
-    border-color: var(--gold);
-  }
-
-  .payment-card-icon {
-    font-size: 42px;
-    margin-bottom: 16px;
-  }
-
-  .payment-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: var(--cream);
-    margin-bottom: 10px;
-  }
-
-  .payment-card p {
-    font-size: 14px;
-    color: rgba(249, 243, 232, 0.6);
-    line-height: 1.7;
-    margin-bottom: 24px;
-  }
-
-  .venmo-handle {
-    display: inline-block;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--gold-light);
-    letter-spacing: 0.05em;
-    padding: 10px 20px;
-    border: 1px solid rgba(201, 168, 76, 0.4);
-    background: rgba(201, 168, 76, 0.08);
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-
-  .venmo-handle:hover {
-    background: rgba(201, 168, 76, 0.2);
-    border-color: var(--gold);
-  }
-
-  .payment-note {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 15px;
-    color: rgba(249, 243, 232, 0.45);
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: 0.05em;
-    font-style: italic;
-  }
-
-  @media (max-width: 900px) {
-    .payment-grid { grid-template-columns: 1fr; }
-  }
-
   /* ===== FOOTER ===== */
   /* footer moved to common.css */
 
@@ -587,6 +474,7 @@
     .synopsis-layout { grid-template-columns: 1fr; }
     .synopsis-aside { position: static; }
     .characters-grid { grid-template-columns: repeat(2, 1fr); }
+    .character-card.featured { grid-column: span 1; }
   }
   @media (max-width: 600px) {
     .characters-grid { grid-template-columns: 1fr; }
@@ -599,12 +487,6 @@
 </head>
 <body>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="lightbox-img" src="" alt="">
-</div>
-
 <!-- SNOWFLAKES -->
 <div class="snowflakes" aria-hidden="true" id="snowflakes"></div>
 
@@ -616,10 +498,10 @@
     </a>
   </div>
   <ul class="nav-links">
-    <li><a href="frozen.html">Frozen</a></li>
-    <li><a href="index.html#gallery">Last Season</a></li>
+    <li><a href="index.html#announcements">Announcements</a></li>
+    <li><a href="index.html#gallery">2025 Season</a></li>
     <li><a href="index.html#about">About</a></li>
-    <li><a href="#payment">Concessions & Donations</a></li>
+    <li><a href="index.html#payment">Register</a></li>
   </ul>
 </nav>
 
@@ -673,7 +555,6 @@
     <div class="frozen-title">FROZEN</div>
     <div class="frozen-subtitle">Based on the Disney animated film</div>
     <div class="hero-badges">
-      <span class="badge">Aug 2&ndash;5, 2026</span>
       <span class="badge">Scripts &amp; Singing</span>
       <span class="badge">Choreography</span>
       <span class="badge">Full Costumes</span>
@@ -681,14 +562,14 @@
     </div>
     <div class="hero-cta">
       <a href="#characters" class="btn btn-ice">Meet the Cast</a>
-      <a href="#auditions" class="btn btn-ice" style="display:none;">Audition Info</a>
-      <a href="#payment" class="btn btn-outline">Donate</a>
+      <a href="#auditions" class="btn btn-ice">Audition Info</a>
+      <a href="index.html#payment" class="btn btn-outline">Register / Donate</a>
     </div>
   </div>
 
   <div class="scroll-hint">
     <span>Scroll</span>
-    <svg class="scroll-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    <div class="scroll-arrow"></div>
   </div>
 </div>
 
@@ -706,24 +587,40 @@
     </div>
 
     <div class="synopsis-aside">
-      <div class="aside-title">Attendee Notes</div>
+      <div class="aside-title">Production Details</div>
       <div class="detail-row">
-        <span class="detail-label">Address</span>
-        <span class="detail-value">14887 S Upper Bend Dr<br>Herriman, UT</span>
+        <span class="detail-label">Show</span>
+        <span class="detail-value">Frozen</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Seating</span>
-        <span class="detail-value">Bring your own chairs or blanket</span>
+        <span class="detail-label">Season</span>
+        <span class="detail-value">Summer 2026</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Company</span>
+        <span class="detail-value">The Backyard Theater Company</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Location</span>
+        <span class="detail-value">Herriman, UT</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Auditions</span>
+        <span class="detail-value">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfRs4PVs2GIn2xTt9dP9KEzPILFBqvaKFIh7IZHBIBq9hjyGA/viewform" target="_blank">
+            Sign Up
+          </a>
+        </span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Performances</span>
-        <span class="detail-value">Aug 2&ndash;5, 2026</span>
+        <span class="detail-value">TBD</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Tickets</span>
-        <span class="detail-value">Free for all ages</span>
+        <span class="detail-label">Registration</span>
+        <span class="detail-value">$20</span>
       </div>
-      <a href="#payment" class="aside-cta">Donate</a>
+      <a href="index.html#payment" class="aside-cta">Register Now</a>
     </div>
   </div>
 </section>
@@ -732,110 +629,95 @@
 <div id="characters">
   <div class="inner">
     <div class="section-label">The Cast</div>
-    <h2 class="section-title">Meet the Cast</h2>
+    <h2 class="section-title">Characters</h2>
     <div class="characters-intro">
-      <p style="font-size:16px; color: rgba(232,246,255,0.65); line-height:1.8;">Meet the performers bringing Arendelle to life this summer.</p>
+      <p style="font-size:16px; color: rgba(232,246,255,0.65); line-height:1.8;">Every role in Frozen brings something unique to the story — from royalty to snowmen to ancient trolls. Auditions for all characters will open soon.</p>
     </div>
 
-    <!-- CAST PHOTOS — headshots live in images/frozen/cast/, named after the performer (e.g. images/frozen/cast/embree-richards.jpg). Update the background-image path + character-actor text as remaining names/photos are confirmed. -->
     <div class="characters-grid">
 
-      <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/kiki-duff.jpg');" onclick="openLightbox('images/frozen/cast/kiki-duff.jpg')"></div>
-        <div class="character-name">Anna <span class="character-actor">Kiki Duff</span></div>
-        <div class="character-role">Princess of Arendelle</div>
-        <div class="character-desc">Fearless and endlessly optimistic, Anna sets off alone into the frozen wilderness to bring her sister home.</div>
+      <!-- FEATURED: Elsa & Anna -->
+      <div class="character-card featured">
+        <div class="character-emoji">❄️</div>
+        <div class="character-name">Elsa</div>
+        <div class="character-role">The Snow Queen · Lead Role</div>
+        <div class="character-desc">The older princess of Arendelle, born with the power to create ice and snow. Fearful of hurting others, she isolates herself behind locked doors — until her powers are accidentally revealed at her coronation. Elsa flees to the mountains and builds her own frozen kingdom, finally free to be herself. Her journey is one of self-acceptance: learning that love is not a weakness to fear, but the only force that can truly set her free.</div>
+      </div>
+
+      <div class="character-card featured">
+        <div class="character-emoji">🌸</div>
+        <div class="character-name">Anna</div>
+        <div class="character-role">Princess of Arendelle · Lead Role</div>
+        <div class="character-desc">Elsa's younger sister: fearless, clumsy, and endlessly optimistic. Shut out from Elsa's life since childhood, Anna has never stopped believing in her sister. When Arendelle is plunged into eternal winter, she doesn't hesitate — she sets off alone into the frozen wilderness to bring Elsa home. Anna is the heart of the story, proving that true love means showing up for the people you love no matter what it costs.</div>
       </div>
 
       <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/embree-richards.jpg');" onclick="openLightbox('images/frozen/cast/embree-richards.jpg')"></div>
-        <div class="character-name">Elsa <span class="character-actor">Embree Richards</span></div>
-        <div class="character-role">The Snow Queen</div>
-        <div class="character-desc">Born with the power to create ice and snow, Elsa flees to the mountains after her secret is revealed — and finally learns to be herself.</div>
-      </div>
-
-      <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/elliot-petty.jpg');" onclick="openLightbox('images/frozen/cast/elliot-petty.jpg')"></div>
-        <div class="character-name">Hans <span class="character-actor">Elliot Petty</span></div>
-        <div class="character-role">Prince of the Southern Isles</div>
-        <div class="character-desc">A charming prince who sweeps Anna off her feet — though his true motives run far darker than they appear.</div>
-      </div>
-
-      <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/luke-lebaron.jpg');" onclick="openLightbox('images/frozen/cast/luke-lebaron.jpg')"></div>
-        <div class="character-name">Kristoff <span class="character-actor">Luke LeBaron</span></div>
+        <div class="character-emoji">🏔️</div>
+        <div class="character-name">Kristoff</div>
         <div class="character-role">Ice Harvester</div>
-        <div class="character-desc">A rugged ice harvester who reluctantly guides Anna into the mountains — and becomes her closest ally.</div>
+        <div class="character-desc">A rugged, no-nonsense ice harvester who reluctantly agrees to guide Anna into the frozen mountains. Gruff on the outside, fiercely loyal at heart — his unlikely friendship with Anna changes them both.</div>
       </div>
 
       <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/paisley-hanley.jpg');" onclick="openLightbox('images/frozen/cast/paisley-hanley.jpg')"></div>
-        <div class="character-name">Olaf <span class="character-actor">Paisley Hanley</span></div>
+        <div class="character-emoji">☃️</div>
+        <div class="character-name">Olaf</div>
         <div class="character-role">The Snowman</div>
-        <div class="character-desc">A cheerful, naive snowman who dreams of experiencing summer, with no idea what that would mean for him.</div>
+        <div class="character-desc">A cheerful, naive snowman accidentally brought to life by Elsa's magic. He dreams with complete sincerity of experiencing summer — with no idea what that would actually mean for him. Pure comic joy.</div>
       </div>
 
       <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/sophia-diaz.jpg');" onclick="openLightbox('images/frozen/cast/sophia-diaz.jpg')"></div>
-        <div class="character-name">Sven <span class="character-actor">Sophia Diaz</span></div>
+        <div class="character-emoji">🦌</div>
+        <div class="character-name">Sven</div>
         <div class="character-role">Kristoff's Reindeer</div>
-        <div class="character-desc">Kristoff's loyal reindeer and best friend — the heart of the story's lighter moments.</div>
+        <div class="character-desc">Kristoff's devoted reindeer and best friend. Loyal, expressive, and more emotionally intelligent than his owner. Sven is the soul of the story's lighter moments.</div>
       </div>
 
       <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/tayvi-mortenson.jpg');" onclick="openLightbox('images/frozen/cast/tayvi-mortenson.jpg')"></div>
-        <div class="character-name">Oaken <span class="character-actor">Tayvi Mortenson</span></div>
-        <div class="character-role">Wandering Oaken's Trading Post</div>
-        <div class="character-desc">The jolly, oversized proprietor of Wandering Oaken's — relentlessly cheerful and always overcharging.</div>
+        <div class="character-emoji">🤴</div>
+        <div class="character-name">Hans</div>
+        <div class="character-role">Prince of the Southern Isles</div>
+        <div class="character-desc">A charming, handsome prince who sweeps Anna off her feet from the moment they meet. Attentive, kind, and seemingly perfect — though his true motivations run far darker than they first appear.</div>
       </div>
 
       <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/charlie-russell.jpg');" onclick="openLightbox('images/frozen/cast/charlie-russell.jpg')"></div>
-        <div class="character-name">Young Anna <span class="character-actor">Charlie Russell</span></div>
-        <div class="character-role">Child Anna</div>
-        <div class="character-desc">A younger Anna, full of energy and completely devoted to her big sister.</div>
-      </div>
-
-      <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/paisley-hanley.jpg');" onclick="openLightbox('images/frozen/cast/paisley-hanley.jpg')"></div>
-        <div class="character-name">Young Elsa <span class="character-actor">Paisley Hanley</span></div>
-        <div class="character-role">Child Elsa</div>
-        <div class="character-desc">A younger Elsa, still learning to control her powers behind the palace's locked doors.</div>
-      </div>
-
-      <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/tayvi-mortenson.jpg');" onclick="openLightbox('images/frozen/cast/tayvi-mortenson.jpg')"></div>
-        <div class="character-name">Duke of Weselton <span class="character-actor">Tayvi Mortenson</span></div>
+        <div class="character-emoji">🎩</div>
+        <div class="character-name">Duke of Weselton</div>
         <div class="character-role">Comic Villain</div>
-        <div class="character-desc">A pompous trade representative who uses Elsa's powers as an excuse to seize control of Arendelle.</div>
+        <div class="character-desc">A pompous, scheming trade representative who uses Elsa's dangerous powers as a pretext to seize control of Arendelle. More bluster than brains, but dangerous in the wrong company.</div>
       </div>
 
       <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/charlie-day.jpg');" onclick="openLightbox('images/frozen/cast/charlie-day.jpg')"></div>
-        <div class="character-name">Pabbie <span class="character-actor">Charlie Day</span></div>
+        <div class="character-emoji">🪨</div>
+        <div class="character-name">Grand Pabbie</div>
         <div class="character-role">Troll Elder</div>
-        <div class="character-desc">The wise troll elder who raised Kristoff and holds powerful secrets about Elsa's past.</div>
+        <div class="character-desc">The ancient, wise leader of the hidden troll colony who raised Kristoff as one of their own. He holds powerful secrets about Elsa's past — and a warning that shapes the entire story.</div>
       </div>
 
-      <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/ella-kern.jpg');" onclick="openLightbox('images/frozen/cast/ella-kern.jpg')"></div>
-        <div class="character-name">Bulda <span class="character-actor">Ella Kern</span></div>
-        <div class="character-role">Troll Matriarch</div>
-        <div class="character-desc">A warm troll mother who adopted Kristoff and never stopped trying to find him a wife.</div>
+      <div class="character-card featured">
+        <div class="character-emoji">🛖</div>
+        <div class="character-name">Oaken</div>
+        <div class="character-role">Wandering Oaken's Trading Post · Supporting Role</div>
+        <div class="character-desc">The jolly, oversized proprietor of Wandering Oaken's Trading Post and Sauna — conveniently located in the middle of nowhere, right as the blizzard hits. Oaken is relentlessly cheerful, aggressively hospitable, and completely unbothered by the fact that his prices are outrageously high. He greets every customer with a booming "Yoo-hoo!" and takes any pushback on his pricing as a personal affront. A fan-favorite scene-stealer with big energy and even bigger laughs.</div>
       </div>
 
-      <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/vera-rasmussen.jpg');" onclick="openLightbox('images/frozen/cast/vera-rasmussen.jpg')"></div>
-        <div class="character-name">Queen Iduna <span class="character-actor">Vera Rasmussen</span></div>
-        <div class="character-role">Queen of Arendelle</div>
-        <div class="character-desc">Elsa and Anna's mother, the beloved ruler of Arendelle.</div>
-      </div>
-
-      <div class="character-card">
-        <div class="character-photo" style="background-image:url('images/frozen/cast/truman-day.jpg');" onclick="openLightbox('images/frozen/cast/truman-day.jpg')"></div>
-        <div class="character-name">King Agnarr <span class="character-actor">Truman Day</span></div>
-        <div class="character-role">King of Arendelle</div>
-        <div class="character-desc">Elsa and Anna's father, the beloved ruler of Arendelle.</div>
+      <div class="character-card featured" style="background: rgba(168,216,234,0.04); border-style: dashed;">
+        <div class="character-emoji">👑</div>
+        <div class="character-name">Additional Roles</div>
+        <div class="character-role">Ensemble &amp; Supporting Characters</div>
+        <div class="character-desc" style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px;">
+          <div class="additional-role-row">
+            <span class="add-role-name">King Agnarr &amp; Queen Iduna</span>
+            <span class="add-role-desc">Elsa and Anna's parents, the beloved rulers of Arendelle. Their brief but powerful presence sets the emotional foundation of the entire story.</span>
+          </div>
+          <div class="additional-role-row">
+            <span class="add-role-name">Bulda</span>
+            <span class="add-role-desc">A warm, boisterous troll mother — the one who adopted Kristoff as a child and never quite stopped trying to find him a wife.</span>
+          </div>
+          <div class="additional-role-row">
+            <span class="add-role-name">Trolls &amp; Villagers</span>
+            <span class="add-role-desc">The troll colony and the townspeople of Arendelle bring the world to life — filled with energy, humor, and heart. Great roles for the full ensemble.</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -843,8 +725,8 @@
 </div>
 
 
-<!-- AUDITIONS (hidden for performance time) -->
-<section id="auditions" style="padding:100px 40px; background: rgba(10, 30, 45, 0.7); position: relative; z-index:2; display:none;">
+<!-- AUDITIONS -->
+<section id="auditions" style="padding:100px 40px; background: rgba(10, 30, 45, 0.7); position: relative; z-index:2;">
   <div class="inner">
     <div class="section-label">Auditions</div>
     <h2 class="section-title">Audition Information</h2>
@@ -868,36 +750,6 @@
 
 </section>
 
-<!-- PAYMENT (copied from index.html) -->
-<div id="payment" class="dark">
-  <div class="inner">
-    <div class="section-label">Support the show</div>
-    <h2 class="section-title">Concessions and Donations</h2>
-    <p class="section-subtitle">All payments are handled via cash or Venmo. All purchases and donations go towards making next year's play even better!</p>
-
-    <div class="payment-grid">
-      <div class="payment-card" style="display:none;">
-        <div class="payment-card-icon">🎟️</div>
-        <h3>Registration Fees</h3>
-        <p>Enroll your child in the production. Fees help cover costumes, props, and production costs. Include your child's name in the Venmo note.</p>
-        <a href="https://venmo.com/carelebaron" class="venmo-handle" target="_blank">@carelebaron</a>
-      </div>
-      <div class="payment-card">
-        <div class="payment-card-icon">🍿</div>
-        <h3>Concessions</h3>
-        <p>Enjoy snacks and drinks at the show! Pre-order concessions for you and your family or pay on the night of the performance.</p>
-        <a href="https://venmo.com/carelebaron" class="venmo-handle" target="_blank">@carelebaron</a>
-      </div>
-      <div class="payment-card">
-        <div class="payment-card-icon">🌟</div>
-        <h3>Donate</h3>
-        <p>Your generosity helps us keep ticket prices accessible and grow the program. Every contribution directly supports our young performers.</p>
-        <a href="https://venmo.com/carelebaron" class="venmo-handle" target="_blank">@carelebaron</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- FOOTER -->
 <footer>
   <img class="footer-logo" src="images/backyard-theater-company-text.png" alt="Backyard Theater Logo"/>
@@ -906,7 +758,7 @@
     <li><a href="index.html#announcements">Announcements</a></li>
     <li><a href="#synopsis">Synopsis</a></li>
     <li><a href="#characters">Characters</a></li>
-    <li><a href="#payment">Concessions &amp; Donations</a></li>
+    <li><a href="index.html#payment">Register</a></li>
   </ul>
   <p class="copyright">© 2026 The Backyard Theater Company · Founded by Luke LeBaron · Salt Lake City, UT</p>
 </footer>
@@ -926,24 +778,6 @@ for (let i = 0; i < 38; i++) {
   flake.style.opacity = 0.3 + Math.random() * 0.5;
   container.appendChild(flake);
 }
-</script>
-
-<script>
-function openLightbox(src) {
-  document.getElementById('lightbox-img').src = src;
-  document.getElementById('lightbox').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-  document.body.style.overflow = '';
-}
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) closeLightbox();
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeLightbox();
-});
 </script>
 
 </body>

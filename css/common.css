@@ -31,7 +31,6 @@ body {
 
 /* Global link color */
 a { color: var(--ice-blue); }
-a:hover { color: #ffffff; }
 
 /* NAV */
 nav {

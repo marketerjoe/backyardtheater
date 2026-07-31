@@ -37,20 +37,6 @@
 
   /* NAV moved to css/common.css */
 
-  .scroll-cue {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    color: rgba(249, 243, 232, 0.5);
-    line-height: 1;
-    font-weight: 300;
-    animation: fadeUp 1s ease 0.9s both;
-    text-decoration: none;
-  }
-  .scroll-cue:hover {
-    color: rgba(249, 243, 232, 0.8);
-  }
-
   /* Page-specific body colors (override common defaults) */
   body { background: var(--cream); color: var(--text); }
 
@@ -417,7 +403,7 @@
   }
 
   .show-title-banner {
-    background: linear-gradient(135deg, var(--ice-dark) 0%, #0A2A3E 50%, var(--ice-dark) 100%);
+    background: var(--dark);
     padding: 32px 40px;
     display: flex;
     align-items: center;
@@ -426,7 +412,7 @@
     gap: 16px;
     max-width: 1200px;
     margin: 40px auto 0;
-    border-left: 4px solid var(--ice-blue);
+    border-left: 4px solid var(--gold);
   }
 
   .show-title-banner h3 {
@@ -582,7 +568,7 @@
 
   .payment-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
 
@@ -638,6 +624,7 @@
   .venmo-handle:hover {
     background: rgba(201, 168, 76, 0.2);
     border-color: var(--gold);
+    color: #fff;
   }
 
   .payment-note {
@@ -827,10 +814,10 @@
     <img src="images/backyard-theater-company-text.png" alt="Backyard Theater Company Logo"/>
   </div>
   <ul class="nav-links">
-    <li><a href="frozen.html">Frozen</a></li>
+    <li><a href="#announcements">Announcements</a></li>
     <li><a href="#gallery">Last Season</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#payment">Concessions & Donations</a></li>
+    <li><a href="#payment">Register & Donate</a></li>
   </ul>
 </nav>
 
@@ -893,16 +880,14 @@
     <img src="images/backyard-theater-company-logo.png" alt="Backyard Theater Company Logo"/>
     <p class="hero-tagline">Where the magic of theater comes home.</p>
     <div class="hero-cta">
-      <a href="frozen.html" class="btn btn-primary">Frozen Program</a>
+      <a href="#announcements" class="btn btn-primary">View Announcements</a>
+      <a href="#about" class="btn btn-outline">Learn More</a>
     </div>
-    <a href="#gallery" class="scroll-cue" aria-label="Scroll down for more">
-      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-    </a>
   </div>
 </div>
 
-<!-- ANNOUNCEMENTS (hidden for performance time) -->
-<div id="announcements" class="dark" style="display:none;">
+<!-- ANNOUNCEMENTS -->
+<div id="announcements" class="dark">
   <div class="inner">
     <div class="section-label">What's happening</div>
     <h2 class="section-title">Announcements</h2>
@@ -976,7 +961,7 @@
 </div>
 
 <!-- GALLERY -->
-<div id="gallery" style="background: linear-gradient(180deg, #F9F3E8 0%, #EFE5D0 100%);">
+<div id="gallery" style="background: linear-gradient(180deg, #F9F3E8 0%, #EFE5D0 100%); padding: 100px 0 0;">
   <div class="inner" style="max-width:1200px; margin: 0 auto; padding: 0 40px;">
     <div class="section-label">2025 Production</div>
     <h2 class="section-title">Beauty & the Beast</h2>
@@ -1008,12 +993,12 @@
     </div>
   </div>
 
-  <div class="show-title-banner" style="max-width:1200px; margin: 40px auto 60px; padding: 32px 40px;">
+  <div class="show-title-banner" style="max-width:1200px; margin: 40px auto 0; padding: 32px 40px;">
     <div>
       <h3>"Frozen"</h3>
       <p>The Backyard Theater Company · Summer 2026 Production</p>
     </div>
-    <a href="frozen.html" class="btn btn-primary">❄️ View Program ❄️</a>
+    <a href="frozen.html" class="btn btn-primary">❄️ Register for 2026 ❄️</a>
   </div>
 </div>
 
@@ -1072,11 +1057,11 @@
 <div id="payment" class="dark">
   <div class="inner">
     <div class="section-label">Support the show</div>
-    <h2 class="section-title">Concessions and Donations</h2>
+    <h2 class="section-title">Register & Donate</h2>
     <p class="section-subtitle">All payments are handled via Venmo. Select the appropriate category below and include a note with your child's name and the purpose of the payment.</p>
 
     <div class="payment-grid">
-      <div class="payment-card" style="display:none;">
+      <div class="payment-card">
         <div class="payment-card-icon">🎟️</div>
         <h3>Registration Fees</h3>
         <p>Enroll your child in the production. Fees help cover costumes, props, and production costs. Include your child's name in the Venmo note.</p>
@@ -1104,10 +1089,10 @@
 <footer>
   <img class="footer-logo" src="images/backyard-theater-company-text.png" alt="Backyard Theater Logo"/>
   <ul class="footer-links">
-    <li><a href="frozen.html">Frozen</a></li>
+    <li><a href="#announcements">Announcements</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#payment">Concessions & Donations</a></li>
+    <li><a href="#payment">Register</a></li>
   </ul>
   <div class="footer-divider"></div>
   <p class="copyright">© 2026 The Backyard Theater Company · Founded by Luke LeBaron</p>
